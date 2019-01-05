@@ -34,7 +34,15 @@ The final project for the Udacity Full Stack Nano Degree. This project is intend
 #### Disable remote access for root user
 - Issue command ```sudo nano /etc/ssh/sshd_config``` to open sshd_config
 - Change PermitRootLogin line to no
-- Reboot ssh serve with command ```sudo service ssh restart```
+- Reboot ssh service with command ```sudo service ssh restart```
+
+#### Install Apache2 
+- Issue command ```sudo apt-get apache2```
+
+#### Install mod_wsgi
+- Run command ```sudo apt-get install libapache2-mod-wsgi python-dev```
+- Issue command ```mod_wsgi with sudo a2enmod wsgi``` to enable mod_wsgi
+- Start the server with command ```sudo service apache2 start```
 
 
 
