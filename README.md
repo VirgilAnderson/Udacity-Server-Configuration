@@ -23,12 +23,19 @@ The final project for the Udacity Full Stack Nano Degree. This project is intend
 - Allow 80 with command ```sudo ufw allow 80/tcp```
 - Allow 123 with command```sudo ufw allow 123/udp```
 - Enable UFW now that it's configured with command ```sudo ufw enable'''
-
+- Configure local timezone to UTC with command ```Run sudo dpkg-reconfigure tzdata``` choose UTC
 
 #### Create user grader
 - run command ```sudo adduser grader``` to create a new user named grader
 - New file in the sudoers directory with ```sudo nano /etc/sudoers.d/grader```
 - Add text ```grader ALL=(ALL:ALL) ALL``` to grant user sudo access
+- Configure key based authorization with command ```cp /root/.ssh/authorized_keys /home/grader/.ssh/authorized_keys```
+
+#### Disable remote access for root user
+- Issue command ```sudo nano /etc/ssh/sshd_config``` to open sshd_config
+- Change PermitRootLogin line to no
+- Reboot ssh serve with command ```sudo service ssh restart```
+
 
 
 
