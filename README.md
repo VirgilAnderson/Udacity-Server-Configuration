@@ -2,9 +2,9 @@
 The final project for the Udacity Full Stack Nano Degree. This project is intended to configure a Linux based server that can serve up the catalog project completed earlier in the course. 
 
 ## Project Information
-- Project IP Address: 34.213.26.66
+- Project IP Address: 18.224.64.127
 - SSH Port: 2200
-- Project domain: http://34.213.26.66
+- Project domain: http://18.224.64.127
 
 ### Summary of Steps
 
@@ -114,4 +114,4 @@ application.secret_key = 'supersecretkey'
 - Change create engine line in your __init__.py and database_setup.py to: engine = create_engine('postgresql://catalog:password@localhost/catalog')
 - Install your db with command ```python /var/www/catalog/catalog/database_setup.py```
 - Restart Apache with command ```sudo service apache2 restart'''
-Visit site at http://34.213.26.66
+Visit site at http://18.224.64.127
