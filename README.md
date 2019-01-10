@@ -4,6 +4,7 @@ The final project for the Udacity Full Stack Nano Degree. This project is intend
 ## Project Information
 - Project IP Address: 34.213.26.66
 - SSH Port: 2200
+- Project domain: http://34.213.26.66
 
 ### Summary of Steps
 
@@ -62,7 +63,55 @@ sys.path.insert(0, "/var/www/catalog/")
 from catalog import app as application
 application.secret_key = 'supersecretkey'
 ```
+- Rename project.py to __init__.py with command ```mv project.py __init__.py```
 
+#### Install the virtual environment
+- Install with command ```sudo pip install virtualenv```
+- Create new virtual environment with command ```sudo virtualenv venv```
+- Activate virtual environment with ```venv/bin/activate```
+- Change permissions with command ```sudo chmod -R 777 venv```
 
+#### Configure and enable a new virtual host
+- Create configuration file with command ```sudo nano /etc/apache2/sites-available/catalog.conf'''
+- Insert the following:
+```
+<VirtualHost *:80>
+    ServerName 35.167.27.204
+    ServerAlias ec2-35-167-27-204.us-west-2.compute.amazonaws.com
+    ServerAdmin admin@35.167.27.204
+    WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
+    WSGIProcessGroup catalog
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+    <Directory /var/www/catalog/catalog/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/catalog/catalog/static
+    <Directory /var/www/catalog/catalog/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+- Enable the virtual host with command ```sudo a2ensite catalog```
 
-
+#### Install PostgreSQL
+- ```sudo apt-get install libpq-dev python-dev```
+- ```sudo apt-get install postgresql postgresql-contrib```
+- ```sudo su - postgres```
+- ```psql```
+- ```CREATE USER catalog WITH PASSWORD 'password';```
+- ```ALTER USER catalog CREATEDB;```
+- ```CREATE DATABASE catalog WITH OWNER catalog;```
+- ```\c catalog```
+- ```REVOKE ALL ON SCHEMA public FROM public;```
+- ```GRANT ALL ON SCHEMA public TO catalog;```
+- ```\q```
+- ```exit```
+- Change create engine line in your __init__.py and database_setup.py to: engine = create_engine('postgresql://catalog:password@localhost/catalog')
+- Install your db with command ```python /var/www/catalog/catalog/database_setup.py```
+- Restart Apache with command ```sudo service apache2 restart'''
+Visit site at http://34.213.26.66
