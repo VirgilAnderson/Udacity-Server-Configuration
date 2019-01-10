@@ -115,3 +115,10 @@ application.secret_key = 'supersecretkey'
 - Install your db with command ```python /var/www/catalog/catalog/database_setup.py```
 - Restart Apache with command ```sudo service apache2 restart'''
 Visit site at http://18.224.64.127
+
+##### Third party resources used
+- [digital ocean] (https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04)
+- [flask installation] (http://flask.pocoo.org/docs/1.0/installation/)
+- [kongling893] (https://github.com/kongling893/Linux-Server-Configuration-UDACITY)
+- [rrjoson] (https://github.com/rrjoson/udacity-linux-server-configuration)
+- [modwsgi user guide] (https://modwsgi.readthedocs.io/en/master/user-guides/quick-configuration-guide.html)
