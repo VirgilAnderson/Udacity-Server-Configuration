@@ -29,7 +29,7 @@ The final project for the Udacity Full Stack Nano Degree. This project is intend
 - run command ```sudo adduser grader``` to create a new user named grader
 - New file in the sudoers directory with ```sudo nano /etc/sudoers.d/grader```
 - Add text ```grader ALL=(ALL:ALL) ALL``` to grant user sudo access
-- Configure key based authorization with command ```cp /root/.ssh/authorized_keys /home/grader/.ssh/authorized_keys```
+- Configure key based authorization with command ```rsync --archive --chown=grader:grader ~/.ssh /home/grader```
 
 #### Disable remote access for root user
 - Issue command ```sudo nano /etc/ssh/sshd_config``` to open sshd_config
@@ -43,6 +43,25 @@ The final project for the Udacity Full Stack Nano Degree. This project is intend
 - Run command ```sudo apt-get install libapache2-mod-wsgi python-dev```
 - Issue command ```mod_wsgi with sudo a2enmod wsgi``` to enable mod_wsgi
 - Start the server with command ```sudo service apache2 start```
+
+#### Clone your application from github
+- install git with comman ```sudo apt-get install git```
+- change to the www directory ```cd /var/www```
+- make a project directory ```sudo mkdir catalog```
+- grant ownership to the user grader ```sudo chown -R grader:grader catalog```
+- change into the catalog directory ```cd catalog```
+- clone your project into a sub directory called catalog ```git clone http://github.com/VirgilAnderson/catalog catalog```
+- Create catalog.wsgi ```nano catalog.wsgi``` inside /var/www/catalog
+- Paste the following code inside catalog.wsgi:
+```
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0, "/var/www/catalog/")
+
+from catalog import app as application
+application.secret_key = 'supersecretkey'
+```
 
 
 
